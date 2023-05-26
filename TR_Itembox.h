@@ -56,7 +56,6 @@ int lastMSB = 0;
 int lastLSB = 0;
 
 int RawVal = 0;
-int Player_guess = 0;
 volatile int encoder_revcount[2] = {0, 0};
 
 void Quiz_System();

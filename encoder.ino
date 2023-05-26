@@ -19,9 +19,6 @@ void Encoder_Setup(){
 
   digitalWrite(encoderPinA, HIGH); //turn pullup resistor on
   digitalWrite(encoderPinB, HIGH); //turn pullup resistor on
-
-  attachInterrupt(encoderPinA, updateEncoder, CHANGE);
-  attachInterrupt(encoderPinB, updateEncoder, CHANGE);
 }
 
 void Encoder_Loop(){                                // "encoder값, 버튼눌림" 을 표시
@@ -44,7 +41,7 @@ void Encoder_Loop(){                                // "encoder값, 버튼눌림
 }
 
 void Encoder_RevCount(){
-  RawVal = readEncoderValue();
+  RawVal = encoderValue/4;
 
   if(RawVal < 0){
     RawVal = 0;
@@ -84,22 +81,24 @@ void updateEncoder(){
   lastEncoded = encoded; //store this value for next time
 
   //95*4엔코더 값 최대최소 제한 걸어두기    
-  if(encoderValue > 380)      encoderValue = 380;              
+  if(encoderValue > NumPixels[PN532]*3*4)      encoderValue = NumPixels[PN532]*3*4;              
   else if(encoderValue < 0)   encoderValue = 0;
 }
 
 //**************************************************Quiz**************************************************
 void Quiz_System(){
   if(isButtonPushDown()){
+
     GameQuiz_check();
+    encoderValue
   }
   else{
-    Encoder_Progress_Loop();
+    Encoder_Loop();
   }
 }
 
 void Quiz_Check(){
-  Player_guess = RawVal;
+  int Player_guess = RawVal;
 
   if(Player_guess == Quiz_answer[QuizCount]){
     Serial.println("[[[[Quiz " + (String)(QuizCount) + "]]]] Success");
@@ -110,4 +109,5 @@ void Quiz_Check(){
     Serial.println("Quiz Fail");                            //네오픽셀 빨강
     NeoBlink(ENCODER, RED, 5, 250);
   }
+  RawVal = Player_guess;
 }
