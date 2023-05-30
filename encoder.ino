@@ -12,7 +12,7 @@ boolean isButtonPushDown(void){
   return false;
 }
 
-void Encoder_Setup(){
+void EncoderInit(){
   pinMode(encoderPinA, INPUT);
   pinMode(encoderPinB, INPUT);
   pinMode(buttonPin, INPUT);
@@ -21,9 +21,11 @@ void Encoder_Setup(){
   digitalWrite(encoderPinB, HIGH); //turn pullup resistor on
 }
 
-void Encoder_Loop(){                                // "encoder값, 버튼눌림" 을 표시
-  Encoder_RevCount();
-  EncoderPointNeo();
+void Encoder_Loop(){              // "encoder값, 버튼눌림" 을 표시
+  Encoder_RevCount();                                 // 엔코더 값 변환
+  Encoder_PointNeo();                                 // 네오픽셀 값 반영
+  Encoder_VibrationStrength(Quiz_answer[QuizCount]);  // 진동 값 반영
+
   Serial.print(readEncoderValue());
   Serial.print(" / ");
   Serial.print(encoder_revcount[0]);
@@ -71,8 +73,8 @@ void updateEncoder(){
   int MSB = digitalRead(encoderPinA); //MSB = most significant bit
   int LSB = digitalRead(encoderPinB); //LSB = least significant bit
 
-  int encoded = (MSB << 1) |LSB; //converting the 2 pin value to single number
-  int sum  = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
+  int encoded = (MSB << 1) |LSB;            //converting the 2 pin value to single number
+  int sum  = (lastEncoded << 2) | encoded;  //adding it to the previous encoded value
 
   if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) encoderValue --;
   if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) encoderValue ++;
@@ -80,17 +82,15 @@ void updateEncoder(){
 
   lastEncoded = encoded; //store this value for next time
 
-  //95*4엔코더 값 최대최소 제한 걸어두기    
+  //엔코더 값 최대최소 제한 걸어두기    
   if(encoderValue > NumPixels[PN532]*3*4)      encoderValue = NumPixels[PN532]*3*4;              
-  else if(encoderValue < 0)   encoderValue = 0;
+  else if(encoderValue < 0)                    encoderValue = 0;
 }
 
 //**************************************************Quiz**************************************************
 void Quiz_System(){
   if(isButtonPushDown()){
-
-    GameQuiz_check();
-    encoderValue
+    Quiz_Check();
   }
   else{
     Encoder_Loop();

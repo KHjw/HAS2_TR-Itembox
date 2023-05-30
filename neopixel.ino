@@ -19,7 +19,7 @@ void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time){
   }
 }
 
-void EncoderPointNeo(){
+void Encoder_PointNeo(){
   int rev = 0;
   int point = 0;
   rev = encoder_revcount[0];
@@ -28,13 +28,13 @@ void EncoderPointNeo(){
   int rev_neo = BLUE0;                                  
   rev_neo = BLUE0 + (rev-1);                            // 나머지 구역 네오픽셀 :: 1번째 바퀴부터 BLUE0,1,2
 
-  pixels[ENCODER].setPixelColor(point, color[RED]);     // 엔코더 위치 point 네오픽셀
+  pixels[ENCODER].setPixelColor(point, color[RED][0], color[RED][1], color[RED][2]);     // 엔코더 위치 point 네오픽셀
 
   for(int i=0; i<point; i++){
-    pixels[ENCODER].setPixelColor(i, color[rev_neo]);   // 나머지 구역 네오픽셀
+    pixels[ENCODER].setPixelColor(i, pixels[ENCODER].Color(color[rev_neo][0], color[rev_neo][1], color[rev_neo][2]));   // 나머지 구역 네오픽셀
   }
   for(int i=(point+1); i<NumPixels[ENCODER]; i++){
-    pixels[ENCODER].setPixelColor(i, color[rev_neo]);
+    pixels[ENCODER].setPixelColor(i, pixels[ENCODER].Color(color[rev_neo][0], color[rev_neo][1], color[rev_neo][2]));
   }
   pixels[ENCODER].show();
-}
+} 

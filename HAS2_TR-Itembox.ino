@@ -17,10 +17,15 @@ void setup() {
   // has2wifi.Setup("city");
   // has2wifi.Setup("badland");
   // has2wifi.Setup();
-  has2wifi.Setup("KT_GiGA_6C64","ed46zx1198");
+  // has2wifi.Setup("KT_GiGA_6C64","ed46zx1198");
+  TimerInit();
   NeopixelInit();
+  EncoderInit();
+  MotorInit();
+  NextionInit();
 }
 
 void loop() {
-
+  game_ptr();
+  BlinkTimer.run();
 }

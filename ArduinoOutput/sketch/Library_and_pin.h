@@ -1,4 +1,4 @@
-#line 1 "c:\\Users\\HAS1\\Desktop\\홍진우 git\\HAS2_TR\\HAS2_TR-Itembox\\Library_and_pin.h"
+#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Library_and_pin.h"
 #ifndef _LIBRARY_AND_PIN_
 #define _LIBRARY_AND_PIN_
 
@@ -21,7 +21,7 @@
 #define PN532_SS2 21
 
 #define PN532_NEOPIXEL_PIN 25
-#define ENCODER_NEOPIXEL_PIN 26
+#define ENCODER_NEOPIXEL_PIN 26 
 #define INNER_NEOPIXEL_PIN 27
 
 #define MOTOR_INA1_PIN  32
