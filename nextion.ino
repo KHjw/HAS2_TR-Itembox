@@ -5,12 +5,8 @@ void NextionInit(){
 
 void SendCmd(String command){           // 영문용 디스플레이 send
   String cmd = "";
-  if(command.startsWith("page") && Language=="Eng"){
-    cmd = "page E" + command.substring(5);
-  }
-  else{
-    cmd = command;
-  }
+  if(command.startsWith("page") && Language=="Eng")    cmd = "page E" + command.substring(5);
+  else    cmd = command;
   sendCommand(cmd.c_str());
 }
 

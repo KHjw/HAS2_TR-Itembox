@@ -69,6 +69,7 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
       rfid_ptr();
       break;
     case 'M':
+      AllNeoColor(RED);
       ESP.restart();
       break;
     case 'E':
@@ -82,55 +83,5 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     default: 
     Serial.println("Wrong TAG");
     break;
-  }
-}
-
-//****************************************rfid_ptr Function****************************************
-void Quiz_Start(){
-  Serial.println("Quiz Start");
-
-  AllNeoColor(BLUE); 
-  attachInterrupt(encoderPinA, updateEncoder, CHANGE);
-  attachInterrupt(encoderPinB, updateEncoder, CHANGE);
-  game_ptr = Game_Quiz;
-}
-
-void Quiz_Solved(){
-  Serial.println("Quiz Solved");
-
-  ItemBoxSelfOpen = true;
-  AllNeoColor(BLUE);
-  ExpSend();                    // 경험치 정보 
-  BatteryPackSend();            // 배터리 개수 정보
-  delay(10);
-  SendCmd("page pgItemOpen");
-  delay(10);
-  SendCmd("wOutTagged.en=1");
-  BoxOpen();
-  pixels[INNER].lightColor(color[YELLOW]);
-  
-  BlinkTimer.deleteTimer(blinkTimerId);
-  BlinkTimerStart(INNER, YELLOW); //내부태그 노란색 점멸 시작
-
-  game_ptr = Game_InnerTag;
-  rfid_ptr = Item_Took;
-}
-
-void Item_Took(){
-  Serial.println("ItemTook");
-  if(true){ 
-    SendCmd("page pgItemTaken");
-    AllNeoColor(RED);
-    // game_ptr = RfidLoopBoth;
-    rfid_ptr = Game_Void;
-    BlinkTimer.deleteTimer(blinkTimerId);
-    ItemBoxUsed = true;
-  }
-  else{
-    Serial.println("CANNOT CARRY MORE BatteryPack");
-    SendCmd("page pgItemTakeFail");
-    NeoBlink(INNER,RED,2,500);
-    BlinkTimer.deleteTimer(blinkTimerId);
-    BlinkTimerStart(INNER, YELLOW); //내부태그 노란색 점멸 시작
   }
 }

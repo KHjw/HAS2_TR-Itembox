@@ -41,13 +41,13 @@ void MotorStop(){
 }
 
 void Encoder_VibrationStrength(int answer){
-    int differenceValue = abs(answer - (encoderValue/4));
-    int vibeStrength = 0;
+    int DifferenceValue = abs(answer - (encoderValue/4));
+    int VibeStrength = 0;
 
-    if(differenceValue < Answer_Range + Vibration_Range * 0)       vibeStrength = 0;    // 정답
-    else if(differenceValue < Answer_Range + Vibration_Range * 1)  vibeStrength = 1;
-    else if(differenceValue < Answer_Range + Vibration_Range * 2)  vibeStrength = 2;
-    else if(differenceValue < Answer_Range + Vibration_Range * 3)  vibeStrength = 3;
-    else vibeStrength = 4;
-    ledcWrite(VibrationLedChannel, Vibration_Strength[vibeStrength]);
+    if(DifferenceValue < Answer_Range + Vibration_Range * 0)       VibeStrength = 0;    // 정답
+    else if(DifferenceValue < Answer_Range + Vibration_Range * 1)  VibeStrength = 1;
+    else if(DifferenceValue < Answer_Range + Vibration_Range * 2)  VibeStrength = 2;
+    else if(DifferenceValue < Answer_Range + Vibration_Range * 3)  VibeStrength = 3;
+    else VibeStrength = 4;
+    ledcWrite(VibrationLedChannel, Vibration_Strength[VibeStrength]);
 }

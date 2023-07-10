@@ -1,12 +1,16 @@
 void TimerInit(){
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
-    BlinkTimer.deleteTimer(blinkTimerId); 
+    BlinkTimerId = BlinkTimer.setInterval(BlinkTime, BlinkTimerFunc);
+    BlinkTimer.deleteTimer(BlinkTimerId);
+    GameTimerId = GameTimer.setInterval(GameTime, GameTimerFunc);
+    GameTimer.deleteTimer(GameTimerId);
 }
 
+//****************************************Blink Timer****************************************
 void BlinkTimerStart(int Neo, int NeoColor){
     blinkNeo = Neo;
     blinkColor = NeoColor;
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
+    if(Neo == ALLNEO)   BlinkTimerId = BlinkTimer.setInterval(BlinkTime, BlinkAllTimerFunc);
+    else                BlinkTimerId = BlinkTimer.setInterval(BlinkTime, BlinkTimerFunc);
 }
 
 void BlinkTimerFunc(){
@@ -19,11 +23,6 @@ void BlinkTimerFunc(){
         pixels[blinkNeo].lightColor(color[BLACK]);
         blinkOn = true;
     }
-}
-
-void BlinkAllTimerStart(int NeoColor){
-    blinkColor = NeoColor;
-    blinkTimerId = BlinkTimer.setInterval(blinkTime,BlinkTimerFunc);
 }
 
 void BlinkAllTimerFunc(){
@@ -41,4 +40,26 @@ void BlinkAllTimerFunc(){
         blinkOn = true;
     }
 }
- 
+
+void GameTimerFunc(){
+    if(GameTimeCNT >= 1){
+        if(GameTimeCNT >= GameTimeCNT_Max){
+            Serial.println("TimeOut ==> Login Reset");
+            ledcWrite(VibrationLedChannel, 0);          // 진동모터 비활성화
+            detachInterrupt(encoderPinA);               // 엔코더 비활성화
+            detachInterrupt(encoderPinB);
+            BlinkTimer.deleteTimer(BlinkTimerId);
+            GameTimer.deleteTimer(GameTimerId);
+            lastEncoded = 0;
+            encoderValue = 41*4; 
+            GameTimeCNT = 0; 
+            SendCmd("page pgWait");
+            game_ptr = Game_Login;
+        }
+        else{
+            long TimeLeft = (GameTimeCNT_Max - GameTimeCNT)*GameTime/1000;
+            Serial.println("TimeOut in " + (String)(TimeLeft) + "sec");
+        }
+    }
+    GameTimeCNT++;
+}

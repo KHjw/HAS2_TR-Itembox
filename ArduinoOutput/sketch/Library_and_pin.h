@@ -8,7 +8,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #include <Nextion.h>
-#include <HAS2_Wifi.h>
+#include <HAS2_MQTT.h>
 #include <SimpleTimer.h>
 
 #define NEXTIONHWSERIAL_RX_PIN 39

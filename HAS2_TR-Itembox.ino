@@ -14,18 +14,20 @@
 
 void setup() {
   Serial.begin(115200);
-  // has2wifi.Setup("city");
-  // has2wifi.Setup("badland");
-  // has2wifi.Setup();
-  // has2wifi.Setup("KT_GiGA_6C64","ed46zx1198");
+  has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독;
+  // has2_mqtt.AddSubscirbe("EI2");
+
   TimerInit();
   NeopixelInit();
   EncoderInit();
-  MotorInit();
   NextionInit();
+  RfidInit();
+  MotorInit();
 }
 
 void loop() {
+  has2_mqtt.ReadSubscirbe();
   game_ptr();
   BlinkTimer.run();
+  GameTimer.run();
 }
