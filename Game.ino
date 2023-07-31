@@ -61,6 +61,7 @@ void Game_Opentag(){
 void Game_Itemtake(){
   Game_ptrPrint("Game_Itemtake");
   RfidLoop(INPN532);
+  RfidMMMMLoop(OUTPN532);
 }
 
 void Game_Used(){
