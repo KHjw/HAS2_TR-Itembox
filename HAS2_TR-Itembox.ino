@@ -27,7 +27,7 @@ void setup() {
 
 void loop() {
   has2_mqtt.ReadSubscirbe();
-  game_ptr();
+  device_ptr();
   BlinkTimer.run();
   GameTimer.run();
 }

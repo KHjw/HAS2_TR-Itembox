@@ -35,3 +35,10 @@ void Encoder_PointNeo(){
   pixels[ENCODER].setPixelColor(point, color[RED][0], color[RED][1], color[RED][2]);     // 엔코더 위치 point 네오픽셀  
   pixels[ENCODER].show();
 } 
+
+void Scenario_WaitBlink(int neoID){
+  if(IsScenarioMode){
+    BlinkTimer.deleteTimer(BlinkTimerId);
+    BlinkTimerStart(neoID, WHITE);               //내부태그 노란색 점멸 시작
+  }
+}

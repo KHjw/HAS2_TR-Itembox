@@ -1,37 +1,16 @@
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\TR_Itembox.h"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\HAS2_TR-Itembox\\TR_Itembox.h"
 #ifndef _DONE_EMLOCK_CODE_
 #define _DONE_EMLOCK_CODE_
 
 #include "Library_and_pin.h"
 
-//****************************************MQTT SETUP****************************************
-HAS2_MQTT has2_mqtt;
-
-//****************************************Game SETUP****************************************
-// game_ptr 함수
-void Game_Void();
-void Game_Manual();
-void Game_Setting();
-void Game_Ready();
-void Game_Selected();
-void Game_Login();
-void Game_Quiz();
-void Game_Opentag();
-void Game_Itemtake();
-void Game_Used();
-void Game_ptrPrint(String print);
-// rfid_ptr 함수
-void Quiz_Start();
-void Quiz_Solved();
-void Item_Took();
-
-void (*game_ptr)() = Game_Manual;
-void (*rfid_ptr)() = Game_Void;
-
+//****************************************Device SETUP****************************************
 String Language = "Kor";
-String game_ptr_state = "";
+String device_ptr_state = "";
+String myDN = "";
 bool ItemBoxSelfOpen = false;
 bool ItemBoxUsed = false;
+bool IsScenarioMode = true;
 
 // 게임 변수 세팅
 int Quiz_answer_num = 3;                                // 퀴즈 정답 갯수
@@ -39,6 +18,35 @@ int Quiz_answer[3] = {13, 43, 21};                      // 퀴즈 [1,2,3] 정답
 int Answer_Range = 2;                                   // 정답 범위
 int Vibration_Range = 5;                                // 진동 범위
 int Vibration_Strength[5] = {200,150,100,50,0};         // 진동 세기
+int Device_EXP = 50;                                    // 경험치 (초기값 50)
+int Device_BP = 3;                                      // 배터리팩 (초기값 3)
+
+//****************************************MQTT SETUP****************************************
+HAS2_MQTT has2_mqtt;
+
+bool IsPlayerBattFull = false;
+
+//****************************************Pointer SETUP****************************************
+// device_ptr 함수
+void Device_Manual();
+void Device_Setting();
+void Device_Ready();
+void Device_Selected();
+void Device_Login();
+void Device_Quiz();
+void Device_Opentag();
+void Device_Itemtake();
+void Device_Used();
+void Device_ptrPrint(String print);
+// rfid_ptr 함수
+void Quiz_Start();
+void Quiz_Solved();
+void Item_Take();
+void Item_Took();
+
+void VoidFunc();  
+void (*device_ptr)() = Device_Manual;
+void (*rfid_ptr)() = VoidFunc;
 
 //****************************************SimpleTimer SETUP****************************************
 SimpleTimer BlinkTimer;
@@ -90,12 +98,17 @@ int rfid_num = 2;
 enum {OUTPN532 = 0, INPN532};
 Adafruit_PN532 nfc[2] = {Adafruit_PN532(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS1),
                          Adafruit_PN532(PN532_SCK, PN532_MISO, PN532_MOSI, PN532_SS2)};
-
 bool rfid_init_complete[2];
+
 void RfidInit();
 void RfidLoop(int pn532_code);
 void RfidLoop_All();
-void CheckingPlayers(uint8_t rfidData[32]);
+
+String tagPlayerDN = "";
+void Manual_PlayerCheck(uint8_t rfidData[32]);
+void Auto_PlayerCheck(uint8_t rfidData[32]);
+void MiniGame_PlayerCheck(uint8_t rfidData[32]);
+void CheckPlayerBatt(String tagDN);
 
 //****************************************Encoder SETUP****************************************
 long readEncoderValue(void);

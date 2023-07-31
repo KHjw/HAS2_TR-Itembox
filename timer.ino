@@ -54,7 +54,7 @@ void GameTimerFunc(){
             encoderValue = 41*4; 
             GameTimeCNT = 0; 
             SendCmd("page pgWait");
-            game_ptr = Game_Login;
+            device_ptr = Device_Login;
         }
         else{
             long TimeLeft = (GameTimeCNT_Max - GameTimeCNT)*GameTime/1000;

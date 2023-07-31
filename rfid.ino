@@ -36,7 +36,8 @@ void RfidLoop(int pn532_code){
     if (nfc[pn532_code].startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A)){                                       // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
       if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
         Serial.println("TAGGGED");
-        CheckingPlayers(data);
+        if(IsScenarioMode)  Auto_PlayerCheck(data);
+        else                Manual_PlayerCheck(data);
       }
     }
   }
@@ -47,7 +48,8 @@ void RfidLoop_All(){
   RfidLoop(INPN532);
 }
 
-void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 확인용
+//****************************************PlayerCheck Function****************************************
+void Manual_PlayerCheck(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 확인용
   String tagUser = "";
   for(int i = 0; i < 4; i++)    //GxPx 데이터만 배열에서 추출해서 string으로 저장
     tagUser += (char)rfidData[i];
@@ -84,4 +86,110 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     Serial.println("Wrong TAG");
     break;
   }
+}
+
+void Auto_PlayerCheck(uint8_t rfidData[32]){
+  String tagUser = "";
+  String tagUserRole = "";
+  for(int i=0; i<4; i++)    //GxPx 데이터만 배열에서 추출해서 string으로 저장
+    tagUser += (char)rfidData[i];
+  Serial.println("tag_user_data : " + tagUser);     // 1. 태그한 플레이어의 역할과 생명칩갯수, 최대생명칩갯수 등 읽어오기
+  if(tagUser == "MMMM"){  //스태프카드 초기화
+    ESP.restart();
+  }
+
+  tagUserRole = has2_mqtt.GetData(tagUser, "R");    // 2. 술래인지, 플레이어인지 구분
+  
+  if(tagUserRole == "player"){                      // 3. 태그한 사용자 판단
+    Serial.println("Player Tagged");
+    tagPlayerDN = tagUser;
+    CheckPlayerBatt(tagUser);
+    rfid_ptr();
+  }
+  else if(tagUserRole == "tagger"){
+    Serial.println("Tagger Tagged");
+  }
+  else if(tagUserRole == "ghost"){
+    Serial.println("Ghost Tagged");
+  }
+  else{
+    Serial.println("Wrong TAG");
+  }
+}
+
+void MiniGame_PlayerCheck(uint8_t rfidData[32]){
+}
+
+void CheckPlayerBatt(String tagDN){
+  int playerBP = has2_mqtt.GetData(tagDN, "BP").toInt();
+  int playerMBP = has2_mqtt.GetData(tagDN, "MBP").toInt();
+
+  if((playerBP + Device_BP) > playerMBP)
+    IsPlayerBattFull = true;
+  else
+    IsPlayerBattFull = false;
+}
+
+//****************************************rfid_ptr Function****************************************
+void Quiz_Start(){
+  has2_mqtt.Situation("tag", tagPlayerDN);
+  Serial.println("Quiz Start");
+  AllNeoColor(BLUE);
+
+  QuizCount = 0;
+  attachInterrupt(encoderPinA, updateEncoder, CHANGE);    // 엔코더 시작
+  attachInterrupt(encoderPinB, updateEncoder, CHANGE);
+  GameTimer.deleteTimer(GameTimerId);
+  GameTimerId = GameTimer.setInterval(GameTime, GameTimerFunc); // 타임아웃 게임타이머 활성화
+
+  device_ptr = Device_Quiz;
+  Serial.println("Quiz Started");
+}
+
+void Quiz_Solved(){
+  has2_mqtt.Situation("tag", tagPlayerDN);
+  Serial.println("Quiz Solved");
+  GameTimer.deleteTimer(GameTimerId);   // 타임아웃 게임타이머 비활성화
+
+  ItemBoxSelfOpen = true;
+  AllNeoColor(BLUE);
+  ExpSend(Device_EXP);                  // 경험치 정보 
+  BatteryPackSend(Device_BP);           // 배터리 개수 정보
+  delay(10);
+  SendCmd("page pgItemOpen");
+  delay(10);
+  SendCmd("wOutTagged.en=1");
+  BoxOpen();
+
+  pixels[INNER].lightColor(color[YELLOW]);
+  BlinkTimer.deleteTimer(BlinkTimerId);
+  BlinkTimerStart(INNER, YELLOW); //내부태그 노란색 점멸 시작
+
+  device_ptr = Device_Itemtake;
+  rfid_ptr = Item_Take;
+}
+
+void Item_Take(){
+  if(!IsPlayerBattFull){
+    has2_mqtt.Situation("tag", tagPlayerDN);
+    Serial.println("ItemTake");
+    SendCmd("page pgItemTaken");
+    ItemBoxUsed = true;
+    BlinkTimer.deleteTimer(BlinkTimerId);
+    AllNeoColor(RED);
+    rfid_ptr = Item_Took;
+    device_ptr = Device_Used;
+  }
+  else{
+    Serial.println("CANNOT CARRY MORE BatteryPack");
+    SendCmd("page pgItemTakeFail");
+    NeoBlink(INNER,RED,2,500);
+    BlinkTimer.deleteTimer(BlinkTimerId);
+    BlinkTimerStart(INNER, YELLOW);               //내부태그 노란색 점멸 시작
+  }
+}
+
+void Item_Took(){
+  Serial.println("ItemTook");
+  AllNeoColor(RED);
 }
