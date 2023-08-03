@@ -1,4 +1,4 @@
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
  /*
 
  *
@@ -20,8 +20,8 @@
  *
 
  */
-# 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
-# 14 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino" 2
+# 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+# 14 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino" 2
 
 void setup() {
   Serial.begin(115200);
@@ -42,7 +42,7 @@ void loop() {
   BlinkTimer.run();
   GameTimer.run();
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 //****************************************game_ptr Function****************************************
 void Game_Manual(){
   Game_ptrPrint("Game_Manual");
@@ -106,6 +106,7 @@ void Game_Opentag(){
 void Game_Itemtake(){
   Game_ptrPrint("Game_Itemtake");
   RfidLoop(INPN532);
+  RfidMMMMLoop(OUTPN532);
 }
 
 void Game_Used(){
@@ -185,7 +186,7 @@ void Item_Took(){
     BlinkTimerStart(INNER, YELLOW); //내부태그 노란색 점멸 시작
   }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 //**************************************************Encoder**************************************************
 long readEncoderValue(void){
     return encoderValue/4;
@@ -308,7 +309,7 @@ void Quiz_Check(){
   encoderValue = Player_guess*4;
   GameTimeCNT = 0;
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void MotorInit(){
     //Linear Motor Init
     pinMode(36,0x05);
@@ -362,25 +363,20 @@ void Encoder_VibrationStrength(int answer){
     else VibeStrength = 4;
     ledcWrite(VibrationLedChannel, Vibration_Strength[VibeStrength]);
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\mqtt.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length)
 {
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-
   String input_data = "";
-
-  for (int i = 0; i < length; i++)
-    input_data += (char)payload[i];
-
-  Serial.print("Message arrived [");
+  Serial.print("Message arrived[");
   Serial.print(topic);
   Serial.print("] : ");
+  for (int i = 0; i < length; i++)
+  {
+      input_data += (char)payload[i];
+  }
   Serial.println(input_data);
+
+  has2_mqtt.SaveByTopic(topic, input_data);
 
   if(input_data == "OTA") has2_mqtt.FirmwareUpdate("itembox");
   else if(input_data == "Setting") game_ptr = Game_Setting;
@@ -388,13 +384,8 @@ void callback(char* topic, byte* payload, unsigned int length)
   else if(input_data == "Activate") game_ptr = Game_Login;
   else if(input_data == "Selected") game_ptr = Game_Selected;
   else if(input_data == "Manual") game_ptr = Game_Manual;
-
-  if((String)(topic) == "ALL"){
-  }
-  else if((String)(topic) == my_topic){
-  }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void NeopixelInit(){
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
@@ -432,7 +423,7 @@ void Encoder_PointNeo(){
   pixels[ENCODER].setPixelColor(point, color[RED][0], color[RED][1], color[RED][2]); // 엔코더 위치 point 네오픽셀  
   pixels[ENCODER].show();
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void NextionInit(){
   nexInit();
   nexHwSerial.begin(9600, 0x800001c, 39, 33);
@@ -454,7 +445,7 @@ void BatteryPackSend(){
   SendCmd("picBatteryPack.pic=5");
   SendCmd("pgItemOpen.vBatteryPack.val=3"); // 배터리팩 3개 차있는걸로 기본세팅
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void RfidInit(){
   RestartPn532:
   for (int i = 0; i < rfid_num; ++i)
@@ -494,6 +485,25 @@ void RfidLoop(int pn532_code){
       if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
         Serial.println("TAGGGED");
         CheckingPlayers(data);
+      }
+    }
+  }
+}
+
+void RfidMMMMLoop(int pn532_code){
+  uint8_t uid[3][7] = {{0, 0, 0, 0, 0, 0, 0},
+                       {0, 0, 0, 0, 0, 0, 0},
+                       {0, 0, 0, 0, 0, 0, 0}}; // Buffer to store the returned UID
+  uint8_t uidLength[] = {0}; // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
+  uint8_t data[32];
+  byte pn532_packetbuffer11[64];
+  pn532_packetbuffer11[0] = 0x00;
+
+  if (nfc[pn532_code].sendCommandCheckAck(pn532_packetbuffer11, 1)){ // rfid 통신 가능한 상태인지 확인
+    if (nfc[pn532_code].startPassiveTargetIDDetection((0x00))){ // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
+      if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
+        Serial.println("TAGGGED");
+        CheckingMMMM(data);
       }
     }
   }
@@ -542,7 +552,31 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     break;
   }
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+
+void CheckingMMMM(uint8_t rfidData[32]){
+  String tagUser = "";
+  for(int i = 0; i < 4; i++) //GxPx 데이터만 배열에서 추출해서 string으로 저장
+    tagUser += (char)rfidData[i];
+  Serial.println("tag_user_data : " + tagUser); // 1. 태그한 플레이어의 역할과 생명칩갯수, 최대생명칩갯수 등 읽어오기
+  switch(tagUser[3]){
+    case 'M':
+      AllNeoColor(RED);
+      ESP.restart();
+      break;
+    case 'E':
+      Language = "Eng";
+      SendCmd("page pgWait"); //영문 대기페이지 로드
+      delay(10);
+      Serial.println("Language set to English");
+      NeoBlink(PN532,PURPLE,2,100); //영문 변환 표시용
+      AllNeoColor(YELLOW);
+      break;
+    default:
+    Serial.println("Wrong TAG");
+    break;
+  }
+}
+# 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void TimerInit(){
     BlinkTimerId = BlinkTimer.setInterval(BlinkTime, BlinkTimerFunc);
     BlinkTimer.deleteTimer(BlinkTimerId);
@@ -608,4 +642,3 @@ void GameTimerFunc(){
     }
     GameTimeCNT++;
 }
-# 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\wifi.ino"

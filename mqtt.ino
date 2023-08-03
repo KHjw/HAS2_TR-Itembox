@@ -1,21 +1,16 @@
 void callback(char* topic, byte* payload, unsigned int length) 
 {
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-  
   String input_data = "";
-
-  for (int i = 0; i < length; i++)
-    input_data += (char)payload[i];
-
-  Serial.print("Message arrived [");
+  Serial.print("Message arrived[");
   Serial.print(topic);
   Serial.print("] : ");
+  for (int i = 0; i < length; i++)
+  {
+      input_data += (char)payload[i];
+  }
   Serial.println(input_data);
+
+  has2_mqtt.SaveByTopic(topic, input_data);
 
   if(input_data == "OTA")               has2_mqtt.FirmwareUpdate("itembox");
   else if(input_data == "Setting")      game_ptr = Game_Setting;
@@ -23,9 +18,4 @@ void callback(char* topic, byte* payload, unsigned int length)
   else if(input_data == "Activate")     game_ptr = Game_Login;
   else if(input_data == "Selected")     game_ptr = Game_Selected;
   else if(input_data == "Manual")       game_ptr = Game_Manual;
-
-  if((String)(topic) == "ALL"){
-  }
-  else if((String)(topic) == my_topic){
-  }
 }

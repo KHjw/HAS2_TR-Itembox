@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
  /*
  *
  * @file TR_Itembox.ino
@@ -14,105 +14,109 @@
 
 #include "TR_Itembox.h"
 
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
 void setup();
-#line 28 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+#line 28 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
 void loop();
-#line 2 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 2 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Manual();
-#line 8 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 8 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Setting();
-#line 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Ready();
-#line 18 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 18 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Selected();
-#line 25 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 25 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Login();
-#line 32 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 32 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Quiz();
-#line 55 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 55 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Opentag();
-#line 61 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 61 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Itemtake();
-#line 66 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 67 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Used();
-#line 72 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 73 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_Void();
-#line 75 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 76 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Game_ptrPrint(String print);
-#line 83 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 84 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Quiz_Start();
-#line 98 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 99 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Quiz_Solved();
-#line 120 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 121 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Item_Take();
-#line 130 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 131 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 void Item_Took();
-#line 2 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 2 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 long readEncoderValue(void);
-#line 6 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 6 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 boolean isButtonPushDown(void);
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void EncoderInit();
-#line 24 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 24 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void updateEncoder();
-#line 44 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 44 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void Encoder_Loop();
-#line 51 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 51 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void Encoder_RevCount();
-#line 77 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 77 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void Encoder_Print();
-#line 95 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 95 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void Quiz_System();
-#line 104 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 104 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 void Quiz_Check();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void MotorInit();
-#line 19 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 19 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void BoxClose();
-#line 28 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 28 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void BoxOpen();
-#line 37 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 37 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void MotorStop();
-#line 43 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 43 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void Encoder_VibrationStrength(int answer);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\mqtt.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void NeopixelInit();
-#line 8 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+#line 8 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void AllNeoColor(int color_code);
-#line 14 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+#line 14 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void NeoBlink(int neo_code, int color_code, int blink_num, int blink_time);
-#line 23 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+#line 23 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void Encoder_PointNeo();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void NextionInit();
-#line 6 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+#line 6 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void SendCmd(String command);
-#line 13 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+#line 13 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void ExpSend();
-#line 18 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+#line 18 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void BatteryPackSend();
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void RfidInit();
-#line 26 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+#line 26 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void RfidLoop(int pn532_code);
-#line 45 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+#line 45 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
+void RfidMMMMLoop(int pn532_code);
+#line 64 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void RfidLoop_All();
-#line 50 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+#line 69 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void CheckingPlayers(uint8_t rfidData[32]);
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+#line 108 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
+void CheckingMMMM(uint8_t rfidData[32]);
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void TimerInit();
-#line 9 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+#line 9 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void BlinkTimerStart(int Neo, int NeoColor);
-#line 16 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+#line 16 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void BlinkTimerFunc();
-#line 28 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+#line 28 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void BlinkAllTimerFunc();
-#line 44 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+#line 44 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void GameTimerFunc();
-#line 15 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
+#line 15 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\HAS2_TR-Itembox.ino"
 void setup() {
   Serial.begin(115200);
   has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독;
@@ -132,7 +136,7 @@ void loop() {
   BlinkTimer.run();
   GameTimer.run();
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\Game.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\Game.ino"
 //****************************************game_ptr Function****************************************
 void Game_Manual(){
   Game_ptrPrint("Game_Manual");
@@ -196,6 +200,7 @@ void Game_Opentag(){
 void Game_Itemtake(){
   Game_ptrPrint("Game_Itemtake");
   RfidLoop(INPN532);
+  RfidMMMMLoop(OUTPN532);
 }
 
 void Game_Used(){
@@ -275,7 +280,7 @@ void Item_Took(){
     BlinkTimerStart(INNER, YELLOW); //내부태그 노란색 점멸 시작
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\encoder.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\encoder.ino"
 //**************************************************Encoder**************************************************
 long readEncoderValue(void){
     return encoderValue/4;
@@ -398,7 +403,7 @@ void Quiz_Check(){
   encoderValue = Player_guess*4;
   GameTimeCNT = 0;
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\motor.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\motor.ino"
 void MotorInit(){
     //Linear Motor Init
     pinMode(BOXSWITCH_PIN,INPUT_PULLUP);
@@ -453,25 +458,20 @@ void Encoder_VibrationStrength(int answer){
     ledcWrite(VibrationLedChannel, Vibration_Strength[VibeStrength]);
 }
 
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\mqtt.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\mqtt.ino"
 void callback(char* topic, byte* payload, unsigned int length) 
 {
-  static bool start = false;
-  if(!start){
-    start = true;
-    has2_mqtt.Publish(my_topic, "start");
-    return ;
-  }
-  
   String input_data = "";
-
-  for (int i = 0; i < length; i++)
-    input_data += (char)payload[i];
-
-  Serial.print("Message arrived [");
+  Serial.print("Message arrived[");
   Serial.print(topic);
   Serial.print("] : ");
+  for (int i = 0; i < length; i++)
+  {
+      input_data += (char)payload[i];
+  }
   Serial.println(input_data);
+
+  has2_mqtt.SaveByTopic(topic, input_data);
 
   if(input_data == "OTA")               has2_mqtt.FirmwareUpdate("itembox");
   else if(input_data == "Setting")      game_ptr = Game_Setting;
@@ -479,13 +479,8 @@ void callback(char* topic, byte* payload, unsigned int length)
   else if(input_data == "Activate")     game_ptr = Game_Login;
   else if(input_data == "Selected")     game_ptr = Game_Selected;
   else if(input_data == "Manual")       game_ptr = Game_Manual;
-
-  if((String)(topic) == "ALL"){
-  }
-  else if((String)(topic) == my_topic){
-  }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\neopixel.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\neopixel.ino"
 void NeopixelInit(){
   for(int i=0; i<NeoNum; i++){
     pixels[i].begin();
@@ -523,7 +518,7 @@ void Encoder_PointNeo(){
   pixels[ENCODER].setPixelColor(point, color[RED][0], color[RED][1], color[RED][2]);     // 엔코더 위치 point 네오픽셀  
   pixels[ENCODER].show();
 } 
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\nextion.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\nextion.ino"
 void NextionInit(){
   nexInit();
   nexHwSerial.begin(9600, SERIAL_8N1, NEXTIONHWSERIAL_RX_PIN, NEXTIONHWSERIAL_TX_PIN);
@@ -546,7 +541,7 @@ void BatteryPackSend(){
   SendCmd("pgItemOpen.vBatteryPack.val=3");    // 배터리팩 3개 차있는걸로 기본세팅
 }
 
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\rfid.ino"
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\rfid.ino"
 void RfidInit(){
   RestartPn532:
   for (int i = 0; i < rfid_num; ++i)
@@ -586,6 +581,25 @@ void RfidLoop(int pn532_code){
       if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
         Serial.println("TAGGGED");
         CheckingPlayers(data);
+      }
+    }
+  }
+}
+
+void RfidMMMMLoop(int pn532_code){
+  uint8_t uid[3][7] = {{0, 0, 0, 0, 0, 0, 0},
+                       {0, 0, 0, 0, 0, 0, 0},
+                       {0, 0, 0, 0, 0, 0, 0}}; // Buffer to store the returned UID
+  uint8_t uidLength[] = {0};                   // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
+  uint8_t data[32];
+  byte pn532_packetbuffer11[64];
+  pn532_packetbuffer11[0] = 0x00;
+
+  if (nfc[pn532_code].sendCommandCheckAck(pn532_packetbuffer11, 1)){ // rfid 통신 가능한 상태인지 확인
+    if (nfc[pn532_code].startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A)){                                       // rfid에 tag 찍혔는지 확인용 //데이터 들어오면 uid정보 가져오기
+      if (nfc[pn532_code].ntag2xx_ReadPage(7, data)){ // ntag 데이터에 접근해서 불러와서 data행열에 저장
+        Serial.println("TAGGGED");
+        CheckingMMMM(data);
       }
     }
   }
@@ -634,7 +648,31 @@ void CheckingPlayers(uint8_t rfidData[32]){ //어떤 카드가 들어왔는지 �
     break;
   }
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\timer.ino"
+
+void CheckingMMMM(uint8_t rfidData[32]){
+  String tagUser = "";
+  for(int i = 0; i < 4; i++)    //GxPx 데이터만 배열에서 추출해서 string으로 저장
+    tagUser += (char)rfidData[i];
+  Serial.println("tag_user_data : " + tagUser);     // 1. 태그한 플레이어의 역할과 생명칩갯수, 최대생명칩갯수 등 읽어오기
+  switch(tagUser[3]){
+    case 'M':
+      AllNeoColor(RED);
+      ESP.restart();
+      break;
+    case 'E':
+      Language = "Eng";
+      SendCmd("page pgWait");                       //영문 대기페이지 로드
+      delay(10);
+      Serial.println("Language set to English");
+      NeoBlink(PN532,PURPLE,2,100);                 //영문 변환 표시용
+      AllNeoColor(YELLOW);
+      break;
+    default: 
+    Serial.println("Wrong TAG");
+    break;
+  }
+}
+#line 1 "c:\\Github\\HAS2-TR\\0_KHjinu\\롤백코드\\아박 롤백\\HAS2_TR-Itembox\\timer.ino"
 void TimerInit(){
     BlinkTimerId = BlinkTimer.setInterval(BlinkTime, BlinkTimerFunc);
     BlinkTimer.deleteTimer(BlinkTimerId);
@@ -700,5 +738,3 @@ void GameTimerFunc(){
     }
     GameTimeCNT++;
 }
-#line 1 "c:\\Github\\HAS2_TR\\HAS2_TR-Itembox\\wifi.ino"
-
