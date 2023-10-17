@@ -6,6 +6,7 @@ void NeopixelInit(){
 }
 
 void AllNeoColor(int color_code){
+  BlinkTimer.deleteTimer(BlinkTimerId);
   for(int n=0; n<NeoNum; n++){
     pixels[n].lightColor(color[color_code]);
   }
@@ -36,9 +37,9 @@ void Encoder_PointNeo(){
   pixels[ENCODER].show();
 } 
 
-void Scenario_WaitBlink(int neoID){
+void Scenario_WaitBlink(int neoID){     // 시나리오 모드용 점멸
   if(IsScenarioMode){
     BlinkTimer.deleteTimer(BlinkTimerId);
-    BlinkTimerStart(neoID, WHITE);               //내부태그 노란색 점멸 시작
+    BlinkTimerStart(neoID, WHITE);
   }
 }

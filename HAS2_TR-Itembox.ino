@@ -14,9 +14,8 @@
 
 void setup() {
   Serial.begin(115200);
-  has2_mqtt.Setup(callback);         // tp-link 접속; ALL, myMAC 구독;
-  // has2_mqtt.AddSubscirbe("EI2");
-
+  has2_mqtt.Setup("train_room", "Code3824@", callback);    // tp-link 접속; ALL, myMAC 구독;
+  has2_mqtt.Situation("start", "my");
   TimerInit();
   NeopixelInit();
   EncoderInit();

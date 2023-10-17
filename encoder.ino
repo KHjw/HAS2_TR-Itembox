@@ -1,8 +1,4 @@
 //**************************************************Encoder**************************************************
-long readEncoderValue(void){
-    return encoderValue/4;
-}
-
 boolean isButtonPushDown(void){
   if(!digitalRead(buttonPin)){
     delay(5);
@@ -37,7 +33,7 @@ void updateEncoder(){
   lastEncoded = encoded; //store this value for next time
 
   //엔코더 값 최대최소 제한 걸어두기    
-  if(encoderValue > NumPixels[ENCODER]*3*4)      encoderValue = NumPixels[ENCODER]*3*4;              
+  if(encoderValue > NumPixels[ENCODER]*3*4)    encoderValue = NumPixels[ENCODER]*3*4;              
   else if(encoderValue < 0)                    encoderValue = 0;
 }
 
@@ -45,7 +41,7 @@ void Encoder_Loop(){
   Encoder_RevCount();                                 // 엔코더 값 변환
   Encoder_PointNeo();                                 // 네오픽셀 값 반영
   Encoder_VibrationStrength(Quiz_answer[QuizCount]);  // 진동 값 반영
-  // Encoder_Print();                                    // 엔코더 값 시리얼 출력
+  // Encoder_Print();                                 // 엔코더 값 시리얼 출력
 }
 
 void Encoder_RevCount(){
@@ -95,6 +91,7 @@ void Encoder_Print(){              // "encoder값, 버튼눌림" 을 시리얼 �
 void Quiz_System(){
   if(isButtonPushDown()){
     Quiz_Check();
+    IsDsSkip = false;
   }
   else{
     Encoder_Loop();

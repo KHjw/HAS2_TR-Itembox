@@ -21,6 +21,7 @@ void BoxClose(){
     ledcWrite(MotorLedChannel, MotorMAX_DUTY_CYCLE - 1);
     digitalWrite(MOTOR_INA1_PIN, LOW);
     digitalWrite(MOTOR_INA2_PIN, HIGH);
+    IsBoxOpen = false;
     delay(4000);
     Serial.println("BOX Closed");
 }
@@ -30,6 +31,7 @@ void BoxOpen(){
     ledcWrite(MotorLedChannel, MotorMAX_DUTY_CYCLE - 1);
     digitalWrite(MOTOR_INA1_PIN, HIGH);
     digitalWrite(MOTOR_INA2_PIN, LOW);
+    IsBoxOpen = true;
     delay(4000);
     Serial.println("BOX Opened");
 }

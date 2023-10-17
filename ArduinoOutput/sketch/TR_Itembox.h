@@ -7,28 +7,34 @@
 //****************************************Device SETUP****************************************
 String Language = "Kor";
 String device_ptr_state = "";
-String myDN = "";
+String current_scenario = "";
 bool ItemBoxSelfOpen = false;
 bool ItemBoxUsed = false;
 bool IsScenarioMode = true;
+bool IsPlayerBattFull = false;
+bool IsDsSkip = false;
+bool IsCorrectScn = false;
 
 // 게임 변수 세팅
-int Quiz_answer_num = 3;                                // 퀴즈 정답 갯수
-int Quiz_answer[3] = {13, 43, 21};                      // 퀴즈 [1,2,3] 정답 (0~47)
-int Answer_Range = 2;                                   // 정답 범위
-int Vibration_Range = 5;                                // 진동 범위
-int Vibration_Strength[5] = {200,150,100,50,0};         // 진동 세기
-int Device_EXP = 50;                                    // 경험치 (초기값 50)
-int Device_BP = 3;                                      // 배터리팩 (초기값 3)
+int Quiz_answer_num = 3;                            // 퀴즈 정답 갯수
+int Quiz_answer[3] = {13, 43, 21};                  // 퀴즈 [1,2,3] 정답 (0~47)
+int Answer_Range = 2;                               // 정답 범위
+int Vibration_Range = 5;                            // 진동 범위
+int Vibration_Strength[5] = {200,150,100,50,0};     // 진동 세기
+int Device_EXP = 50;                                // 경험치 (초기값 50)
+int Device_BP = 3;                                  // 배터리팩 (초기값 3)
 
 //****************************************MQTT SETUP****************************************
 HAS2_MQTT has2_mqtt;
-
-bool IsPlayerBattFull = false;
+void callback(char* topic, byte* payload, unsigned int length);
+void Mqtt_updateDS(String myDS);
+void Mqtt_updateSCN(String mySCN);
+void SituationSend();
 
 //****************************************Pointer SETUP****************************************
 // device_ptr 함수
 void Device_Manual();
+void Device_MiniGame();
 void Device_Setting();
 void Device_Ready();
 void Device_Selected();
@@ -37,15 +43,21 @@ void Device_Quiz();
 void Device_Opentag();
 void Device_Itemtake();
 void Device_Used();
+void Device_Stelth();
+void Device_Kill();
 void Device_ptrPrint(String print);
 // rfid_ptr 함수
 void Quiz_Start();
 void Quiz_Solved();
 void Item_Take();
 void Item_Took();
+// dummy 함수
+void Dummy_Encoder();
+void Dummy_Quizsolved();
+void Dummy_Itemtake();
 
-void VoidFunc();  
-void (*device_ptr)() = Device_Manual;
+void VoidFunc();
+void (*device_ptr)() = Device_MiniGame;
 void (*rfid_ptr)() = VoidFunc;
 
 //****************************************SimpleTimer SETUP****************************************
@@ -102,6 +114,7 @@ bool rfid_init_complete[2];
 
 void RfidInit();
 void RfidLoop(int pn532_code);
+void RfidMMMMLoop(int pn532_code);
 void RfidLoop_All();
 
 String tagPlayerDN = "";
@@ -109,16 +122,16 @@ void Manual_PlayerCheck(uint8_t rfidData[32]);
 void Auto_PlayerCheck(uint8_t rfidData[32]);
 void MiniGame_PlayerCheck(uint8_t rfidData[32]);
 void CheckPlayerBatt(String tagDN);
+void MasterCardCheck(uint8_t rfidData[32]);
 
 //****************************************Encoder SETUP****************************************
-long readEncoderValue(void);
 boolean isButtonPushDown(void);
 
 void EncoderInit();
 void Encoder_Loop();
 void Encoder_Print();
 void Encoder_RevCount();
-void updateEncoder();
+void updateEncoder(); 
 
 volatile int lastEncoded = 0;
 volatile long encoderValue = 41*4;          // 엔코더 초기값 _ 2rev 맨위
@@ -138,6 +151,9 @@ int QuizCount = 0;
 HardwareSerial nexHwSerial(2);
 
 void NextionInit();
+void SendCmd(String command);
+void ExpSend(int exp);
+void BatteryPackSend(int bp);
 
 //****************************************MOTOR SETUP****************************************************************
 const int MotorFreq = 5000;
@@ -146,6 +162,7 @@ const int MotorLedChannel = 3;
 const int VibrationLedChannel = 4;
 const int MotorMAX_DUTY_CYCLE = (int)(pow(2, MotorResolution) - 1);
 const int VibtationMAX_DUTY_CYCLE = (int)(pow(2, MotorResolution) - 1);
+bool IsBoxOpen;
 
 void MotorInit();
 void BoxClose();

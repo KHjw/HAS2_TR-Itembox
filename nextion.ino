@@ -3,8 +3,10 @@ void NextionInit(){
   nexHwSerial.begin(9600, SERIAL_8N1, NEXTIONHWSERIAL_RX_PIN, NEXTIONHWSERIAL_TX_PIN);
 }
 
-void SendCmd(String command){           // 영문용 디스플레이 send
-  String cmd = "";
+void SendCmd(String command){           // 영문용 디스플레이 send, wait 화면 끄기
+  if(command == "page pgWait")   SendCmd("sleep=1");
+
+  String cmd = "";  
   if(command.startsWith("page") && Language=="Eng")    cmd = "page E" + command.substring(5);
   else    cmd = command;
   sendCommand(cmd.c_str());
